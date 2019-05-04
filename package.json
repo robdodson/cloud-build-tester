@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "deploy": "gcloud app deploy --project cloud-build-tester"
+    "deploy": "gcloud app deploy --project cloud-build-tester-239607 --quiet"
   },
   "keywords": [],
   "author": "",
