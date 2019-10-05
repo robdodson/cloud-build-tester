@@ -5,6 +5,7 @@ on:
 
 jobs:
   send_survey_job:
+    name: Send survey
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
