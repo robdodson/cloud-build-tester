@@ -7182,13 +7182,9 @@ const {context} = github;
 
 (async () => {
   try {
-    if (context.issue) {
-      console.log('context.issue', context.issue);
-    }
-    console.log('context.repo', context.repo);
     await octokit.issues.createComment({
       ...context.repo,
-      issue_number: context.payload.issue.number,
+      issue_number: context.issue.number,
       body: 'Do a barrel roll, @robdodson!'
     });
   } catch(err) {
