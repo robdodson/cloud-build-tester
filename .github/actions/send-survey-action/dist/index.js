@@ -7178,27 +7178,30 @@ module.exports = function(fn) {
 const core = __webpack_require__(401);
 const github = __webpack_require__(58);
 const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
-const {context} = github;
-const CONTENT_LABEL = 'content proposal';
+const { context } = github;
+const CONTENT_LABEL = "content proposal";
 
 (async () => {
   try {
-    const hasContentLabel = await octokit.issues.listLabelsOnIssue({
-          ...context.repo,
-          issue_number: context.issue.number,
-        }).map(label => label.name).includes(CONTENT_LABEL);
+    const hasContentLabel = (await octokit.issues.listLabelsOnIssue({
+      ...context.repo,
+      issue_number: context.issue.number
+    }))
+      .map(label => label.name)
+      .includes(CONTENT_LABEL);
 
     if (hasContentLabel) {
       await octokit.issues.createComment({
         ...context.repo,
         issue_number: context.issue.number,
-        body: 'Do a barrel roll, @robdodson!'
+        body: "Do a barrel roll, @robdodson!"
       });
     }
-  } catch(err) {
+  } catch (err) {
     core.setFailed(err.message);
   }
 })();
+
 
 /***/ }),
 
