@@ -7179,21 +7179,25 @@ const core = __webpack_require__(401);
 const github = __webpack_require__(58);
 const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
 const {context} = github;
+const CONTENT_LABEL = 'content proposal';
 
 (async () => {
   try {
-    const labels = await octokit.issues.listLabelsOnIssue({
-      ...context.repo,
-      issue_number: context.issue.number,
-    });
+    const hasContentLabel = await octokit.issues
+        .listLabelsOnIssue({
+          ...context.repo,
+          issue_number: context.issue.number,
+        })
+        .map(label => label.name)
+        .includes(CONTENT_LABEL);
 
-    console.log(JSON.stringify(labels, undefined, 2));
-
-    await octokit.issues.createComment({
-      ...context.repo,
-      issue_number: context.issue.number,
-      body: 'Do a barrel roll, @robdodson!'
-    });
+    if (hasContentLabel) {
+      await octokit.issues.createComment({
+        ...context.repo,
+        issue_number: context.issue.number,
+        body: 'Do a barrel roll, @robdodson!'
+      });
+    }
   } catch(err) {
     core.setFailed(err.message);
   }
