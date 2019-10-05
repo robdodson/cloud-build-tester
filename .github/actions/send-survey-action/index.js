@@ -1,12 +1,13 @@
+const core = require('@actions/core');
 const github = require('@actions/github');
 const {context} = github;
 const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
 
 (async () => {
-  console.log(JSON.stringify(context, undefined, 2));
-  await octokit.issues.create({
-    ...context.repo,
-    title: 'New issue!',
-    body: 'Hello Universe!'
-  })
+  try {
+    const params = context.issue({ body: 'Do a thing @robdodson.' });
+    await octokit.issues.createComment(params);
+  } catch(err) {
+    core.setFailed(err.message);
+  }
 })();
