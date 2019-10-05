@@ -1,3 +1,5 @@
+const github = require('@actions/github');
+
 (async () => {
   const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
   const {repository} = await octokit.graphql(
