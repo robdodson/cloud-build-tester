@@ -7185,9 +7185,9 @@ const {context} = github;
     const labels = await octokit.issues.listLabelsOnIssue({
       ...context.repo,
       issue_number: context.issue.number,
-    }).nodes.map(label => label.name);
+    });
 
-    console.log(labels);
+    console.log(JSON.stringify(labels, undefined, 2));
 
     await octokit.issues.createComment({
       ...context.repo,
