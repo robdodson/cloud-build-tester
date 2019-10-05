@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "deploy": "gcloud app deploy --project cloud-build-tester-239607 --quiet"
+    "deploy": "gcloud app deploy --project cloud-build-tester-239607 --quiet",
+    "build": "ncc build .github/actions/send-survey-action/index.js -o .github/actions/send-survey-action/dist"
   },
   "keywords": [],
   "author": "",
