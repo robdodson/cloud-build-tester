@@ -47,25 +47,16 @@ module.exports =
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const github = __webpack_require__(23);
+const {context} = github;
+const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
 
 (async () => {
-  const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
-  const {repository} = await octokit.graphql(
-    `
-      {
-        repository(owner: "robdodson", name: "cloud-build-tester") {
-          issues(last: 3) {
-            edges {
-              node {
-                title
-              }
-            }
-          }
-        }
-      }
-    `
-  );
-  console.log(repository);
+  console.log(JSON.stringify(context, undefined, 2));
+  await octokit.issues.create({
+    ...context.repo,
+    title: 'New issue!',
+    body: 'Hello Universe!'
+  })
 })();
 
 /***/ }),
