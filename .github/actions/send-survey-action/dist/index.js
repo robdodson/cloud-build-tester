@@ -7177,13 +7177,20 @@ module.exports = function(fn) {
 
 const core = __webpack_require__(401);
 const github = __webpack_require__(58);
-const {context} = github;
 const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
+const {context} = github;
 
 (async () => {
   try {
-    const params = context.issue({ body: 'Do a thing @robdodson.' });
-    await octokit.issues.createComment(params);
+    if (context.issue) {
+      console.log('context.issue', context.issue);
+    }
+    console.log('context.repo', context.repo);
+    await octokit.issues.createComment({
+      ...context.repo,
+      issue_number: context.payload.issue.number,
+      body: 'Do a barrel roll, @robdodson!'
+    });
   } catch(err) {
     core.setFailed(err.message);
   }
