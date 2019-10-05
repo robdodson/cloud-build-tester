@@ -1,0 +1,10 @@
+name: Send feedback survey
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  send_survey_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/send-survey-action
