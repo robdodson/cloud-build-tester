@@ -7183,10 +7183,12 @@ const CONTENT_LABEL = "content proposal";
 
 (async () => {
   try {
-    const hasContentLabel = (await octokit.issues.listLabelsOnIssue({
+    const labels = await octokit.issues.listLabelsOnIssue({
       ...context.repo,
       issue_number: context.issue.number
-    }))
+    });
+
+    const hasContentLabel = labels
       .map(label => label.name)
       .includes(CONTENT_LABEL);
 
