@@ -11,8 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Send survey
-        uses: robdodson/labeled-issues-reminder@v1.0.0
+        uses: robdodson/labeled-issues-reminder@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: 'Hello, world!'
