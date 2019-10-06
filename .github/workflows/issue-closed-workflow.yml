@@ -5,6 +5,7 @@ on:
 
 jobs:
   survey_reminder_job:
+    name: Feedback survey reminder
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
