@@ -11,19 +11,17 @@ const CONTENT_LABEL = "content proposal";
       issue_number: context.issue.number
     });
 
-    JSON.stringify(labels, undefined, 2);
+    console.log(labels);
 
-    const hasContentLabel = labels
-      .map(label => label.name)
-      .includes(CONTENT_LABEL);
+    // const hasContentLabel = labels.map(label => label.name).includes(CONTENT_LABEL);
 
-    if (hasContentLabel) {
-      await octokit.issues.createComment({
-        ...context.repo,
-        issue_number: context.issue.number,
-        body: "Do a barrel roll, @robdodson!"
-      });
-    }
+    // if (hasContentLabel) {
+    //   await octokit.issues.createComment({
+    //     ...context.repo,
+    //     issue_number: context.issue.number,
+    //     body: "Do a barrel roll, @robdodson!"
+    //   });
+    // }
   } catch (err) {
     core.setFailed(err.message);
   }
