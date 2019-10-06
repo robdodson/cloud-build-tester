@@ -11,6 +11,8 @@ const CONTENT_LABEL = "content proposal";
       issue_number: context.issue.number
     });
 
+    JSON.stringify(labels, undefined, 2);
+
     const hasContentLabel = labels
       .map(label => label.name)
       .includes(CONTENT_LABEL);
