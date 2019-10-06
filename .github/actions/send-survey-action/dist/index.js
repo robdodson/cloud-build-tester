@@ -7183,22 +7183,22 @@ const CONTENT_LABEL = "content proposal";
 
 (async () => {
   try {
-    const labels = await octokit.issues.listLabelsOnIssue({
+    const { data: labels } = await octokit.issues.listLabelsOnIssue({
       ...context.repo,
       issue_number: context.issue.number
     });
 
-    console.log(labels);
+    const hasContentLabel = labels
+      .map(label => label.name)
+      .includes(CONTENT_LABEL);
 
-    // const hasContentLabel = labels.map(label => label.name).includes(CONTENT_LABEL);
-
-    // if (hasContentLabel) {
-    //   await octokit.issues.createComment({
-    //     ...context.repo,
-    //     issue_number: context.issue.number,
-    //     body: "Do a barrel roll, @robdodson!"
-    //   });
-    // }
+    if (hasContentLabel) {
+      await octokit.issues.createComment({
+        ...context.repo,
+        issue_number: context.issue.number,
+        body: "Do a barrel roll, @robdodson!"
+      });
+    }
   } catch (err) {
     core.setFailed(err.message);
   }
