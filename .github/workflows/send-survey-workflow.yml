@@ -14,3 +14,5 @@ jobs:
         uses: robdodson/labeled-issues-reminder@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: 'Hello, world!'
