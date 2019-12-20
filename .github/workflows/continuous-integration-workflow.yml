@@ -9,13 +9,12 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Build
+      - name: Checkout
         uses: actions/checkout@v1
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-        run: npm install
-        run: npm run build
+      - run: npm install && npm run build
 
       - name: Deploy
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
@@ -23,4 +22,4 @@ jobs:
           version: '270.0.0'
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_KEY }}
-        run: gcloud app deploy --project cloud-build-tester-239607
+      - run: gcloud app deploy --project cloud-build-tester-239607
