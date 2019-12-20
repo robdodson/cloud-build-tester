@@ -1,0 +1,26 @@
+name: Continuous integration
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        uses: actions/checkout@v1
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+        run: npm install
+        run: npm run build
+
+      - name: Deploy
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '270.0.0'
+          service_account_email: ${{ secrets.GCLOUD_EMAIL }}
+          service_account_key: ${{ secrets.GCLOUD_KEY }}
+        run: gcloud app deploy --project cloud-build-tester-239607

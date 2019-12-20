@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "build": "echo 'Building!'",
     "deploy": "gcloud app deploy --project cloud-build-tester-239607 --quiet"
   },
   "keywords": [],
