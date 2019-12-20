@@ -24,4 +24,4 @@ jobs:
           version: '270.0.0'
           service_account_email: ${{ secrets.GCLOUD_EMAIL }}
           service_account_key: ${{ secrets.GCLOUD_KEY }}
-      - run: gcloud app deploy
+      - run: gcloud app deploy --project cloud-build-tester-239607
